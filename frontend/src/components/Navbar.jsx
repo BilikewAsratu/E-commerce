@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { assets } from '../assets/assets'
 import { Link, NavLink } from 'react-router-dom'
 
 const Navbar = () => {
+    const [visible, setVisible] = useState(false)
+
     return (
         <div className='flex items-center justify-between py-5 font-medium'>
             <img src={assets.logo} className='w-36' alt='logo image' />
@@ -37,8 +39,90 @@ const Navbar = () => {
                     </div>
                 </div>
                 <Link to='/cart' className='relative'>
-                    <img src={assets.cart_icon} className='w-5 min-w-5'/>
+                    <img src={assets.cart_icon} className='w-5 min-w-5' />
+                    <p className='absolute -right-1.25 -bottom-1.25 w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>10</p>
                 </Link>
+                <img onClick={() => setVisible(true)} src={assets.menu_icon} className='w-5 cursor-pointer sm:hidden' />
+            </div>
+            {/* sidebar menu for small screen */}
+            <div
+                className={`fixed inset-0 z-50 bg-white transition-all duration-300 ease-in-out ${visible ? "translate-x-0" : "-translate-x-full"
+                    }`}
+            >
+                <div className="flex flex-col h-full">
+
+                    {/* Header */}
+                    <div
+                        onClick={() => setVisible(false)}
+                        className="flex items-center gap-3 px-5 py-5 border-b cursor-pointer active:bg-gray-100"
+                    >
+                        <img
+                            src={assets.dropdown_icon}
+                            className="w-4 rotate-180"
+                            alt=""
+                        />
+                        <span className="text-lg font-semibold text-gray-800">
+                            Back
+                        </span>
+                    </div>
+
+                    {/* Navigation */}
+                    <nav className="flex flex-col mt-3">
+
+                        <NavLink
+                            to="/"
+                            onClick={() => setVisible(false)}
+                            className={({ isActive }) =>
+                                `px-6 py-4 text-lg font-medium transition-all duration-200 ${isActive
+                                    ? "bg-black text-white"
+                                    : "text-gray-700 hover:bg-gray-100"
+                                }`
+                            }
+                        >
+                            Home
+                        </NavLink>
+
+                        <NavLink
+                            to="/collection"
+                            onClick={() => setVisible(false)}
+                            className={({ isActive }) =>
+                                `px-6 py-4 text-lg font-medium transition-all duration-200 ${isActive
+                                    ? "bg-black text-white"
+                                    : "text-gray-700 hover:bg-gray-100"
+                                }`
+                            }
+                        >
+                            Collection
+                        </NavLink>
+
+                        <NavLink
+                            to="/about"
+                            onClick={() => setVisible(false)}
+                            className={({ isActive }) =>
+                                `px-6 py-4 text-lg font-medium transition-all duration-200 ${isActive
+                                    ? "bg-black text-white"
+                                    : "text-gray-700 hover:bg-gray-100"
+                                }`
+                            }
+                        >
+                            About
+                        </NavLink>
+
+                        <NavLink
+                            to="/contact"
+                            onClick={() => setVisible(false)}
+                            className={({ isActive }) =>
+                                `px-6 py-4 text-lg font-medium transition-all duration-200 ${isActive
+                                    ? "bg-black text-white"
+                                    : "text-gray-700 hover:bg-gray-100"
+                                }`
+                            }
+                        >
+                            Contact
+                        </NavLink>
+
+                    </nav>
+                </div>
             </div>
         </div>
     )
