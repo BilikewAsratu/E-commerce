@@ -7,7 +7,7 @@ const Navbar = () => {
 
     return (
         <div className='flex items-center justify-between py-5 font-medium'>
-            <img src={assets.logo} className='w-36' alt='logo image' />
+           <Link to='/'><img src={assets.logo} className='w-36' alt='logo image' /></Link>
             <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
                 <NavLink to='/' className='flex flex-col items-center gap-1'>
                     <p>Home</p>
@@ -45,40 +45,20 @@ const Navbar = () => {
                 <img onClick={() => setVisible(true)} src={assets.menu_icon} className='w-5 cursor-pointer sm:hidden' />
             </div>
             {/* sidebar menu for small screen */}
-            <div
-                className={`fixed inset-0 z-50 bg-white transition-all duration-300 ease-in-out ${visible ? "translate-x-0" : "-translate-x-full"
-                    }`}
-            >
+            <div className={`fixed inset-0 z-50 bg-white transition-all duration-300 ease-in-out ${visible ? "translate-x-0" : "-translate-x-full"}`}>
                 <div className="flex flex-col h-full">
-
-                    {/* Header */}
-                    <div
-                        onClick={() => setVisible(false)}
-                        className="flex items-center gap-3 px-5 py-5 border-b cursor-pointer active:bg-gray-100"
-                    >
-                        <img
-                            src={assets.dropdown_icon}
-                            className="w-4 rotate-180"
-                            alt=""
-                        />
-                        <span className="text-lg font-semibold text-gray-800">
-                            Back
-                        </span>
+                    <div onClick={() => setVisible(false)} className="flex items-center gap-3 px-5 py-5 border-b cursor-pointer active:bg-gray-100">
+                        <img src={assets.dropdown_icon} className="w-4 rotate-180" alt="" />
+                        <span className="text-lg font-semibold text-gray-800">Back</span>
                     </div>
-
-                    {/* Navigation */}
                     <nav className="flex flex-col mt-3">
-
-                        <NavLink
-                            to="/"
-                            onClick={() => setVisible(false)}
+                        <NavLink to="/" onClick={() => setVisible(false)}
                             className={({ isActive }) =>
                                 `px-6 py-4 text-lg font-medium transition-all duration-200 ${isActive
                                     ? "bg-black text-white"
                                     : "text-gray-700 hover:bg-gray-100"
                                 }`
-                            }
-                        >
+                            }>
                             Home
                         </NavLink>
 
